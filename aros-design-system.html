@@ -1,0 +1,704 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AROS — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   AROS · DESIGN TOKENS (esta folha de estilo É a referência)
+   ============================================================ */
+:root{
+  /* — Brand · Primary (Royal Blue, extraído do logotipo #244F9D) — */
+  --color-primary-50:#eef2fb; --color-primary-100:#d6e0f4; --color-primary-200:#aec1e9;
+  --color-primary-300:#7e9bd9; --color-primary-400:#4f72c2; --color-primary-500:#244f9d;
+  --color-primary-600:#1f4488; --color-primary-700:#1a3870; --color-primary-800:#152c57;
+  --color-primary-900:#0f1f3d;
+  /* — Brand · Deep Navy (paleta #023E7C) — */
+  --color-navy-500:#023e7c; --color-navy-700:#022c58;
+  /* — Brand · Info / Bright Blue (paleta #008BD0) — */
+  --color-info-300:#5cc0ef; --color-info-500:#008bd0; --color-info-700:#0069a0;
+  /* — Brand · Accent (Orange CTA #F29200 / logo #DB6D0E) — */
+  --color-accent-300:#ffc266; --color-accent-400:#ffa733; --color-accent-500:#f29200;
+  --color-accent-600:#db6d0e; --color-accent-700:#b45600;
+  /* — Brand · Highlight (Amber #FFBB02) — */
+  --color-highlight-400:#ffcb40; --color-highlight-500:#ffbb02;
+  /* — Neutrals (preto + slate #2A4151 + charcoal #333A44 + grey #707173) — */
+  --color-neutral-0:#ffffff; --color-neutral-50:#f6f7f9; --color-neutral-100:#eceef1;
+  --color-neutral-200:#d9dce1; --color-neutral-300:#b7bcc4; --color-neutral-400:#8b9098;
+  --color-neutral-500:#707173; --color-neutral-600:#4f555e; --color-neutral-700:#333a44;
+  --color-neutral-800:#2a4151; --color-neutral-900:#10151c; --color-neutral-1000:#000000;
+  /* — Semânticas — */
+  --color-success-bg:#e7f6ee; --color-success:#1e8a52; --color-success-border:#9bd9b6;
+  --color-warning-bg:#fff6e0; --color-warning:#b45600; --color-warning-border:#ffd98a;
+  --color-error-bg:#fdecec;   --color-error:#c0392b;   --color-error-border:#f3b6b0;
+
+  /* — Espaçamento — */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-6:24px;
+  --space-8:32px; --space-12:48px; --space-16:64px; --space-20:80px; --space-30:120px;
+
+  /* — Raios — */
+  --radius-sm:6px; --radius-md:12px; --radius-lg:20px; --radius-full:999px;
+
+  /* — Sombras — */
+  --shadow-card:0 1px 2px rgba(16,21,28,.04), 0 8px 24px rgba(16,21,28,.08);
+  --shadow-dropdown:0 4px 12px rgba(16,21,28,.10), 0 12px 32px rgba(16,21,28,.12);
+  --shadow-modal:0 24px 64px rgba(16,21,28,.24);
+  --shadow-focus:0 0 0 3px rgba(36,79,157,.35);
+
+  /* — Tipografia — */
+  --font-display:'Archivo', system-ui, sans-serif;
+  --font-body:'Hanken Grotesk', system-ui, sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+
+  /* — Layout — */
+  --container:1200px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  color:var(--color-neutral-800);
+  background:var(--color-neutral-50);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+code{font-family:var(--font-mono);font-size:.85em}
+
+.wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--space-6)}
+
+/* ---- Cabeçalho ---- */
+.masthead{
+  background:var(--color-primary-900);
+  color:var(--color-neutral-0);
+  padding:var(--space-20) 0 var(--space-16);
+  position:relative;overflow:hidden;
+}
+.masthead::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(900px 360px at 80% -10%, rgba(242,146,0,.22), transparent 60%),
+    radial-gradient(700px 320px at 0% 110%, rgba(0,139,208,.20), transparent 60%);
+  pointer-events:none;
+}
+.masthead .wrap{position:relative;z-index:1}
+.masthead img.logo{width:160px;margin-bottom:var(--space-8);
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
+.eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--color-accent-500);margin-bottom:var(--space-3)}
+.masthead h1{font-family:var(--font-display);font-weight:900;
+  font-size:clamp(38px,6vw,72px);line-height:1;letter-spacing:-.02em;max-width:14ch}
+.masthead p.lede{margin-top:var(--space-6);max-width:60ch;font-size:clamp(16px,2vw,20px);
+  color:var(--color-primary-100)}
+.masthead .meta{margin-top:var(--space-8);display:flex;gap:var(--space-8);flex-wrap:wrap;
+  font-size:14px;color:var(--color-primary-200)}
+.masthead .meta b{color:var(--color-neutral-0);font-weight:600}
+
+/* ---- Navegação por âncora ---- */
+nav.toc{position:sticky;top:0;z-index:20;background:rgba(15,31,61,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+nav.toc ul{list-style:none;display:flex;gap:var(--space-1);overflow-x:auto;
+  max-width:var(--container);margin-inline:auto;padding:var(--space-2) var(--space-6)}
+nav.toc a{color:var(--color-primary-100);text-decoration:none;font-size:13px;
+  font-weight:600;white-space:nowrap;padding:var(--space-2) var(--space-3);
+  border-radius:var(--radius-sm);transition:.2s var(--ease)}
+nav.toc a:hover{background:rgba(255,255,255,.10);color:#fff}
+
+/* ---- Seções ---- */
+section{padding:var(--space-20) 0;border-bottom:1px solid var(--color-neutral-200)}
+.sec-num{font-family:var(--font-mono);color:var(--color-accent-600);font-size:13px;
+  letter-spacing:.16em;text-transform:uppercase}
+h2.sec{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,4vw,44px);
+  line-height:1.08;letter-spacing:-.01em;color:var(--color-neutral-900);
+  margin:var(--space-2) 0 var(--space-4)}
+.sec-intro{max-width:64ch;color:var(--color-neutral-600);font-size:17px;margin-bottom:var(--space-12)}
+h3.blk{font-family:var(--font-display);font-weight:700;font-size:22px;
+  color:var(--color-neutral-900);margin:var(--space-12) 0 var(--space-4)}
+h3.blk:first-of-type{margin-top:0}
+p+p{margin-top:var(--space-4)}
+
+/* ---- Grid utilitário ---- */
+.grid{display:grid;gap:var(--space-6)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:880px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+/* ---- Cards de doc ---- */
+.doc-card{background:var(--color-neutral-0);border:1px solid var(--color-neutral-200);
+  border-radius:var(--radius-md);padding:var(--space-6);box-shadow:var(--shadow-card)}
+.doc-card h4{font-family:var(--font-display);font-weight:700;font-size:17px;
+  color:var(--color-neutral-900);margin-bottom:var(--space-2)}
+.doc-card p{font-size:15px;color:var(--color-neutral-600)}
+
+/* ---- 1. Análise: tabela ---- */
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius-md);
+  overflow:hidden;box-shadow:var(--shadow-card);font-size:15px}
+th,td{text-align:left;padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-neutral-100);vertical-align:top}
+th{background:var(--color-primary-900);color:#fff;font-family:var(--font-display);
+  font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+tr:last-child td{border-bottom:none}
+td code{background:var(--color-neutral-100);padding:2px 6px;border-radius:4px}
+
+/* ---- 2. Swatches ---- */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--space-3)}
+.sw{border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--color-neutral-200);background:#fff}
+.sw .chip{height:88px}
+.sw .info{padding:var(--space-3)}
+.sw .info b{display:block;font-size:14px;color:var(--color-neutral-900);font-weight:600}
+.sw .info span{font-family:var(--font-mono);font-size:12px;color:var(--color-neutral-500)}
+.scale-row{display:flex;border-radius:var(--radius-md);overflow:hidden;
+  box-shadow:var(--shadow-card);margin-bottom:var(--space-3)}
+.scale-row .step{flex:1;height:64px;display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:6px;font-family:var(--font-mono);font-size:10px}
+
+/* ---- 3. Tipografia ---- */
+.type-row{display:grid;grid-template-columns:120px 1fr;gap:var(--space-6);
+  padding:var(--space-4) 0;border-bottom:1px solid var(--color-neutral-200);align-items:baseline}
+.type-row .tag{font-family:var(--font-mono);font-size:12px;color:var(--color-neutral-500)}
+.type-row .spec{font-family:var(--font-mono);font-size:11px;color:var(--color-neutral-400);
+  margin-top:var(--space-2)}
+@media(max-width:680px){.type-row{grid-template-columns:1fr}}
+.t-h1{font-family:var(--font-display);font-weight:900;font-size:56px;line-height:1.02;letter-spacing:-.02em}
+.t-h2{font-family:var(--font-display);font-weight:800;font-size:40px;line-height:1.08;letter-spacing:-.01em}
+.t-h3{font-family:var(--font-display);font-weight:700;font-size:28px;line-height:1.2}
+.t-h4{font-family:var(--font-display);font-weight:600;font-size:22px;line-height:1.3}
+.t-h5{font-family:var(--font-body);font-weight:700;font-size:16px;line-height:1.4;
+  text-transform:uppercase;letter-spacing:.04em}
+.t-h6{font-family:var(--font-body);font-weight:700;font-size:13px;line-height:1.4;
+  text-transform:uppercase;letter-spacing:.10em;color:var(--color-neutral-500)}
+.t-body{font-size:17px;line-height:1.6}
+.t-small{font-size:14px;line-height:1.5;color:var(--color-neutral-600)}
+.t-cap{font-size:12px;line-height:1.4;letter-spacing:.02em;color:var(--color-neutral-500)}
+
+/* ---- 5. Espaçamento ---- */
+.space-demo{display:flex;flex-direction:column;gap:var(--space-2)}
+.space-demo .row{display:flex;align-items:center;gap:var(--space-4)}
+.space-demo .bar{background:var(--color-accent-500);height:18px;border-radius:3px}
+.space-demo .lbl{font-family:var(--font-mono);font-size:12px;color:var(--color-neutral-600);width:160px;flex-shrink:0}
+
+/* ============================================================
+   COMPONENTES REAIS (use estes estilos em produção)
+   ============================================================ */
+.btn{font-family:var(--font-body);font-weight:600;font-size:15px;letter-spacing:.01em;
+  border:none;border-radius:var(--radius-sm);padding:12px 22px;cursor:pointer;
+  transition:.2s var(--ease);display:inline-flex;align-items:center;gap:8px;line-height:1}
+.btn:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+/* Primário (azul) */
+.btn-primary{background:var(--color-primary-500);color:#fff}
+.btn-primary:hover{background:var(--color-primary-600);transform:translateY(-1px)}
+.btn-primary:active{background:var(--color-primary-700);transform:translateY(0)}
+/* Secundário (laranja) — TEXTO ESCURO por contraste */
+.btn-secondary{background:var(--color-accent-500);color:var(--color-neutral-900)}
+.btn-secondary:hover{background:var(--color-accent-400)}
+.btn-secondary:active{background:var(--color-accent-600);color:#fff}
+/* Outline */
+.btn-outline{background:transparent;color:var(--color-primary-600);
+  box-shadow:inset 0 0 0 1.5px var(--color-primary-500)}
+.btn-outline:hover{background:var(--color-primary-50)}
+/* Ghost */
+.btn-ghost{background:transparent;color:var(--color-primary-600)}
+.btn-ghost:hover{background:var(--color-primary-50)}
+.btn:disabled,.btn-disabled{background:var(--color-neutral-200)!important;
+  color:var(--color-neutral-400)!important;cursor:not-allowed;box-shadow:none!important;transform:none!important}
+
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:var(--space-4);align-items:start}
+.comp-cell{background:#fff;border:1px solid var(--color-neutral-200);border-radius:var(--radius-md);
+  padding:var(--space-6);display:flex;flex-direction:column;gap:var(--space-3);align-items:flex-start}
+.comp-cell .state{font-family:var(--font-mono);font-size:11px;color:var(--color-neutral-400);text-transform:uppercase;letter-spacing:.08em}
+
+/* Inputs */
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-4)}
+.field label{font-size:13px;font-weight:600;color:var(--color-neutral-700)}
+.input{font-family:var(--font-body);font-size:15px;padding:11px 14px;border-radius:var(--radius-sm);
+  border:1.5px solid var(--color-neutral-300);background:#fff;color:var(--color-neutral-900);
+  transition:.18s var(--ease);width:100%}
+.input::placeholder{color:var(--color-neutral-400)}
+.input:focus{outline:none;border-color:var(--color-primary-500);box-shadow:var(--shadow-focus)}
+.input.is-error{border-color:var(--color-error)}
+.input.is-success{border-color:var(--color-success)}
+.hint{font-size:12px}
+.hint.err{color:var(--color-error)}
+.hint.ok{color:var(--color-success)}
+textarea.input{resize:vertical;min-height:96px}
+
+/* Cards de produto (serviço / projeto / depoimento) */
+.show-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6)}
+@media(max-width:880px){.show-cards{grid-template-columns:1fr}}
+.card-svc{background:#fff;border:1px solid var(--color-neutral-200);border-radius:var(--radius-lg);
+  padding:var(--space-8);box-shadow:var(--shadow-card);transition:.25s var(--ease)}
+.card-svc:hover{transform:translateY(-4px);box-shadow:var(--shadow-dropdown)}
+.card-svc .ico{width:48px;height:48px;border-radius:var(--radius-md);
+  background:var(--color-primary-50);color:var(--color-primary-600);
+  display:grid;place-items:center;margin-bottom:var(--space-4)}
+.card-svc h4{font-family:var(--font-display);font-weight:700;font-size:19px;color:var(--color-neutral-900);margin-bottom:var(--space-2)}
+.card-svc p{font-size:14px;color:var(--color-neutral-600)}
+
+.card-proj{border-radius:var(--radius-lg);overflow:hidden;background:#fff;
+  border:1px solid var(--color-neutral-200);box-shadow:var(--shadow-card);transition:.25s var(--ease)}
+.card-proj:hover{transform:translateY(-4px);box-shadow:var(--shadow-dropdown)}
+.card-proj .thumb{aspect-ratio:16/10;background:
+  linear-gradient(135deg,var(--color-primary-500),var(--color-navy-500));
+  position:relative;display:grid;place-items:center}
+.card-proj .thumb span{position:absolute;top:12px;left:12px;font-size:11px;font-weight:600;
+  background:var(--color-accent-500);color:var(--color-neutral-900);padding:4px 10px;border-radius:var(--radius-full)}
+.card-proj .thumb b{font-family:var(--font-display);color:rgba(255,255,255,.92);font-size:20px}
+.card-proj .body{padding:var(--space-6)}
+.card-proj h4{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--color-neutral-900);margin-bottom:4px}
+.card-proj p{font-size:14px;color:var(--color-neutral-600)}
+
+.card-test{background:#fff;border:1px solid var(--color-neutral-200);border-radius:var(--radius-lg);
+  padding:var(--space-8);box-shadow:var(--shadow-card);position:relative}
+.card-test::before{content:"\201C";position:absolute;top:6px;left:18px;font-family:var(--font-display);
+  font-size:72px;color:var(--color-primary-100);line-height:1}
+.card-test p{position:relative;font-size:15px;color:var(--color-neutral-700);margin-bottom:var(--space-4)}
+.card-test .who{display:flex;align-items:center;gap:12px}
+.card-test .av{width:42px;height:42px;border-radius:50%;background:var(--color-primary-500);
+  color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:700}
+.card-test .who b{display:block;font-size:14px;color:var(--color-neutral-900)}
+.card-test .who span{font-size:12px;color:var(--color-neutral-500)}
+
+/* ---- 7. Estética: radius/shadow ---- */
+.fx{display:flex;flex-direction:column;gap:8px;align-items:center}
+.fx .box{width:100%;height:80px;background:#fff;border:1px solid var(--color-neutral-200)}
+.fx .lbl{font-family:var(--font-mono);font-size:12px;color:var(--color-neutral-500)}
+
+/* ---- 8. Ícones ---- */
+.ico-row{display:flex;gap:var(--space-6);flex-wrap:wrap;align-items:center;margin-top:var(--space-4)}
+.ico-row svg{width:30px;height:30px;stroke:var(--color-primary-600);fill:none;
+  stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---- 10. Animação demo ---- */
+.anim-demo{display:inline-block;padding:14px 24px;background:var(--color-primary-500);color:#fff;
+  border-radius:var(--radius-sm);font-weight:600;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.anim-demo:hover{transform:translateY(-3px) scale(1.02);box-shadow:var(--shadow-dropdown)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---- Code blocks (tokens) ---- */
+pre{background:var(--color-primary-900);color:#dce5f5;border-radius:var(--radius-md);
+  padding:var(--space-6);overflow:auto;font-family:var(--font-mono);font-size:13px;line-height:1.7}
+pre .c{color:#7e9bd9}.tok-k{color:var(--color-accent-500)}.tok-v{color:var(--color-info-300)}
+
+/* ---- Callout ---- */
+.callout{border-left:4px solid var(--color-accent-500);background:var(--color-warning-bg);
+  padding:var(--space-4) var(--space-6);border-radius:0 var(--radius-md) var(--radius-md) 0;
+  font-size:15px;color:var(--color-neutral-700);margin:var(--space-6) 0}
+.callout b{color:var(--color-warning)}
+
+/* ---- Pill list ---- */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--space-3)}
+.pill{font-size:13px;font-weight:600;padding:6px 14px;border-radius:var(--radius-full);
+  background:var(--color-primary-50);color:var(--color-primary-700)}
+
+footer.foot{background:var(--color-neutral-1000);color:var(--color-neutral-400);
+  padding:var(--space-12) 0;font-size:13px;text-align:center}
+footer.foot b{color:#fff}
+</style>
+
+<!-- ============================== MASTHEAD ============================== -->
+<header class="masthead">
+  <div class="wrap">
+    <img class="logo" src="data:image/png;base64,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" alt="AROS arte digital">
+    <div class="eyebrow">Design System · v1.0</div>
+    <h1>O sistema visual da AROS</h1>
+    <p class="lede">Da identidade à interface: um manual vivo que transforma a marca AROS em uma base consistente, acessível e pronta para escalar em Figma, HTML/CSS, Tailwind, React e Next.js.</p>
+    <div class="meta">
+      <span><b>Marca</b> · AROS — arte digital</span>
+      <span><b>Aplicação</b> · Blog &amp; portfólio profissional</span>
+      <span><b>Base</b> · Royal Blue + Laranja</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc"><ul>
+  <li><a href="#analise">1 · Análise</a></li>
+  <li><a href="#cores">2 · Cores</a></li>
+  <li><a href="#tipografia">3 · Tipografia</a></li>
+  <li><a href="#grid">4 · Grid</a></li>
+  <li><a href="#espaco">5 · Espaçamento</a></li>
+  <li><a href="#componentes">6 · Componentes</a></li>
+  <li><a href="#estetica">7 · Estética</a></li>
+  <li><a href="#icones">8 · Ícones</a></li>
+  <li><a href="#imagens">9 · Imagens</a></li>
+  <li><a href="#animacao">10 · Animação</a></li>
+  <li><a href="#acess">11 · Acessibilidade</a></li>
+  <li><a href="#tokens">12 · Tokens</a></li>
+  <li><a href="#conversao">13 · Conversão</a></li>
+</ul></nav>
+
+<!-- ============================== 1. ANÁLISE ============================== -->
+<section id="analise"><div class="wrap">
+  <div class="sec-num">01 — Identidade</div>
+  <h2 class="sec">Leitura da identidade visual</h2>
+  <p class="sec-intro">Antes dos tokens, o diagnóstico. O que a marca AROS comunica antes mesmo de alguém ler uma palavra — e como isso direciona cada decisão do sistema.</p>
+  <table>
+    <tr><th>Dimensão</th><th>Leitura</th></tr>
+    <tr><td><b>Personalidade</b></td><td>Confiante e direta. O logotipo em letras encorpadas e arredondadas transmite solidez sem rigidez — uma marca técnica, mas com energia criativa.</td></tr>
+    <tr><td><b>Posicionamento</b></td><td>Estúdio digital acessível e profissional. Não é uma big tech fria nem um freelancer amador: ocupa o espaço de parceiro próximo e competente.</td></tr>
+    <tr><td><b>Emoções</b></td><td>Confiança (azul), energia e ação (laranja), clareza (contraste alto e formas limpas). A combinação evita tanto a frieza corporativa quanto o exagero.</td></tr>
+    <tr><td><b>Estilo predominante</b></td><td>Geométrico, contemporâneo e funcional. Formas cheias, cantos suavizados, paleta saturada com âncoras neutras escuras.</td></tr>
+    <tr><td><b>Nível de sofisticação</b></td><td>Médio-alto. A base é forte; o que eleva ao premium é a disciplina de espaçamento, hierarquia e contenção no uso da cor — exatamente o que este sistema garante.</td></tr>
+    <tr><td><b>Público sugerido</b></td><td>Pequenos e médios negócios, profissionais liberais e empreendedores que querem parecer maiores e mais confiáveis online.</td></tr>
+  </table>
+  <div class="callout"><b>Decisão de marca:</b> o logotipo usa um azul royal <code>#244F9D</code> que difere dos azuis da paleta (<code>#023E7C</code> e <code>#008BD0</code>). Resolvemos isso elegendo o azul do logo como <b>Primária</b>, o navy como tom de <b>profundidade</b> (seções escuras) e o azul vivo como cor de <b>informação/links</b>. Assim a marca fica coerente em vez de competir consigo mesma.</div>
+</div></section>
+
+<!-- ============================== 2. CORES ============================== -->
+<section id="cores"><div class="wrap">
+  <div class="sec-num">02 — Cor</div>
+  <h2 class="sec">Sistema de cores</h2>
+  <p class="sec-intro">Cores dominantes com acentos cirúrgicos. O azul carrega a identidade; o laranja existe para uma única missão: ação. Quanto mais raro o laranja, mais ele converte.</p>
+
+  <h3 class="blk">Cores primárias</h3>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#244F9D"></div><div class="info"><b>Royal Blue</b><span>#244F9D · Primary 500</span></div></div>
+    <div class="sw"><div class="chip" style="background:#023E7C"></div><div class="info"><b>Deep Navy</b><span>#023E7C · profundidade</span></div></div>
+    <div class="sw"><div class="chip" style="background:#008BD0"></div><div class="info"><b>Bright Blue</b><span>#008BD0 · info/links</span></div></div>
+  </div>
+  <p class="t-small" style="margin-top:12px"><b>Uso:</b> Royal Blue para marca, navegação, botões primários e títulos de destaque. Deep Navy para seções imersivas (hero, rodapé). Bright Blue para links, ícones informativos e detalhes — nunca em texto pequeno sobre branco (ver acessibilidade).</p>
+
+  <h3 class="blk">Cores secundárias (acento)</h3>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#F29200"></div><div class="info"><b>Orange CTA</b><span>#F29200 · Accent 500</span></div></div>
+    <div class="sw"><div class="chip" style="background:#DB6D0E"></div><div class="info"><b>Burnt Orange</b><span>#DB6D0E · logo/hover</span></div></div>
+    <div class="sw"><div class="chip" style="background:#FFBB02"></div><div class="info"><b>Amber</b><span>#FFBB02 · highlight</span></div></div>
+  </div>
+  <p class="t-small" style="margin-top:12px"><b>Uso:</b> laranja exclusivamente em CTAs principais, badges e marcadores de progresso. Amber para destaques pontuais (estrelas, etiquetas "novo"). Reserve — se tudo é destaque, nada é.</p>
+
+  <h3 class="blk">Cores de suporte</h3>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid #eceef1"></div><div class="info"><b>Fundo claro</b><span>#FFFFFF / #F6F7F9</span></div></div>
+    <div class="sw"><div class="chip" style="background:#2A4151"></div><div class="info"><b>Texto / Slate</b><span>#2A4151</span></div></div>
+    <div class="sw"><div class="chip" style="background:#D9DCE1"></div><div class="info"><b>Bordas</b><span>#D9DCE1</span></div></div>
+    <div class="sw"><div class="chip" style="background:#1E8A52"></div><div class="info"><b>Sucesso</b><span>#1E8A52</span></div></div>
+    <div class="sw"><div class="chip" style="background:#B45600"></div><div class="info"><b>Alerta</b><span>#B45600</span></div></div>
+    <div class="sw"><div class="chip" style="background:#C0392B"></div><div class="info"><b>Erro</b><span>#C0392B</span></div></div>
+  </div>
+
+  <h3 class="blk">Escalas (tints &amp; shades)</h3>
+  <p class="t-small" style="margin-bottom:12px">Cada cor de marca recebe uma escala 50→900 para estados, fundos e hierarquia. Geradas a partir dos HEX originais.</p>
+  <div class="scale-row">
+    <div class="step" style="background:#eef2fb;color:#244f9d">50</div>
+    <div class="step" style="background:#d6e0f4;color:#244f9d">100</div>
+    <div class="step" style="background:#aec1e9;color:#1a3870">200</div>
+    <div class="step" style="background:#7e9bd9;color:#0f1f3d">300</div>
+    <div class="step" style="background:#4f72c2;color:#fff">400</div>
+    <div class="step" style="background:#244f9d;color:#fff">500</div>
+    <div class="step" style="background:#1f4488;color:#fff">600</div>
+    <div class="step" style="background:#1a3870;color:#fff">700</div>
+    <div class="step" style="background:#152c57;color:#fff">800</div>
+    <div class="step" style="background:#0f1f3d;color:#fff">900</div>
+  </div>
+  <div class="scale-row">
+    <div class="step" style="background:#fff4e0;color:#b45600">50</div>
+    <div class="step" style="background:#ffe3b3;color:#b45600">100</div>
+    <div class="step" style="background:#ffc266;color:#7a3b00">200/300</div>
+    <div class="step" style="background:#ffa733;color:#7a3b00">400</div>
+    <div class="step" style="background:#f29200;color:#1a1a1a">500</div>
+    <div class="step" style="background:#db6d0e;color:#fff">600</div>
+    <div class="step" style="background:#b45600;color:#fff">700</div>
+  </div>
+  <div class="scale-row">
+    <div class="step" style="background:#f6f7f9;color:#333a44">50</div>
+    <div class="step" style="background:#eceef1;color:#333a44">100</div>
+    <div class="step" style="background:#d9dce1;color:#333a44">200</div>
+    <div class="step" style="background:#b7bcc4;color:#10151c">300</div>
+    <div class="step" style="background:#8b9098;color:#fff">400</div>
+    <div class="step" style="background:#707173;color:#fff">500</div>
+    <div class="step" style="background:#4f555e;color:#fff">600</div>
+    <div class="step" style="background:#333a44;color:#fff">700</div>
+    <div class="step" style="background:#2a4151;color:#fff">800</div>
+    <div class="step" style="background:#10151c;color:#fff">900</div>
+  </div>
+</div></section>
+
+<!-- ============================== 3. TIPOGRAFIA ============================== -->
+<section id="tipografia"><div class="wrap">
+  <div class="sec-num">03 — Tipografia</div>
+  <h2 class="sec">Tipografia</h2>
+  <p class="sec-intro">A fonte <b>Upheaval</b> enviada é pixelada — ótima como assinatura retrô pontual, mas inviável para um blog premium legível. Recomendamos reservá-la para um detalhe decorativo (ex.: página 404) e adotar uma dupla equilibrada: <b>Archivo</b> (display encorpado, ecoa o peso do logo) + <b>Hanken Grotesk</b> (corpo limpo e quente).</p>
+
+  <div class="type-row"><div><div class="tag">H1</div><div class="spec">Archivo · 900 · 56px · LH 1.02 · LS -.02em</div></div><div class="t-h1">Design que converte</div></div>
+  <div class="type-row"><div><div class="tag">H2</div><div class="spec">Archivo · 800 · 40px · LH 1.08 · LS -.01em</div></div><div class="t-h2">Projetos em destaque</div></div>
+  <div class="type-row"><div><div class="tag">H3</div><div class="spec">Archivo · 700 · 28px · LH 1.2</div></div><div class="t-h3">Como trabalhamos</div></div>
+  <div class="type-row"><div><div class="tag">H4</div><div class="spec">Archivo · 600 · 22px · LH 1.3</div></div><div class="t-h4">Criação de sites</div></div>
+  <div class="type-row"><div><div class="tag">H5</div><div class="spec">Hanken · 700 · 16px · LH 1.4 · upper · LS .04em</div></div><div class="t-h5">Subtítulo de seção</div></div>
+  <div class="type-row"><div><div class="tag">H6 / Eyebrow</div><div class="spec">Hanken · 700 · 13px · LH 1.4 · upper · LS .10em</div></div><div class="t-h6">Categoria do artigo</div></div>
+  <div class="type-row"><div><div class="tag">Corpo</div><div class="spec">Hanken · 400 · 17px · LH 1.6</div></div><div class="t-body">Texto de leitura confortável para artigos e descrições. O comprimento ideal de linha fica entre 60 e 75 caracteres, garantindo ritmo de leitura agradável em qualquer tela.</div></div>
+  <div class="type-row"><div><div class="tag">Pequeno</div><div class="spec">Hanken · 400 · 14px · LH 1.5</div></div><div class="t-small">Texto auxiliar, metadados e descrições secundárias.</div></div>
+  <div class="type-row"><div><div class="tag">Botão</div><div class="spec">Hanken · 600 · 15px · LH 1 · LS .01em</div></div><div><span class="btn btn-primary">Solicitar orçamento</span></div></div>
+  <div class="type-row"><div><div class="tag">Legenda</div><div class="spec">Hanken · 400 · 12px · LH 1.4 · LS .02em</div></div><div class="t-cap">Foto: projeto Raízes Café · 2025</div></div>
+</div></section>
+
+<!-- ============================== 4. GRID ============================== -->
+<section id="grid"><div class="wrap">
+  <div class="sec-num">04 — Layout</div>
+  <h2 class="sec">Grid &amp; layout</h2>
+  <p class="sec-intro">Grid de 12 colunas, container central e respiros generosos. A estrutura sustenta tanto seções densas (portfólio) quanto seções de respiro (depoimentos).</p>
+  <div class="grid g3">
+    <div class="doc-card"><h4>Desktop · ≥1024px</h4><p>Container <b>1200px</b> · <b>12 colunas</b> · gutter <b>24px</b> · margens laterais <b>≥48px</b>.</p></div>
+    <div class="doc-card"><h4>Tablet · 640–1023px</h4><p>Fluido até 1200px · <b>8 colunas</b> · gutter <b>20px</b> · margens <b>32px</b>.</p></div>
+    <div class="doc-card"><h4>Mobile · &lt;640px</h4><p>Coluna única · <b>4 colunas</b> internas · gutter <b>16px</b> · margens <b>20px</b>.</p></div>
+  </div>
+  <p class="t-small" style="margin-top:16px"><b>Regra prática:</b> blocos de conteúdo nunca ultrapassam 1200px; texto corrido limita-se a ~720px para preservar a legibilidade.</p>
+</div></section>
+
+<!-- ============================== 5. ESPAÇAMENTO ============================== -->
+<section id="espaco"><div class="wrap">
+  <div class="sec-num">05 — Espaçamento</div>
+  <h2 class="sec">Escala de espaçamento</h2>
+  <p class="sec-intro">Base de 4px. Tudo no sistema — padding, gaps, margens — é múltiplo dessa unidade. Consistência invisível que faz a interface parecer cuidada.</p>
+  <div class="space-demo">
+    <div class="row"><span class="lbl">4px · space-1</span><div class="bar" style="width:4px"></div><span class="t-small">microajustes, ícone↔texto</span></div>
+    <div class="row"><span class="lbl">8px · space-2</span><div class="bar" style="width:8px"></div><span class="t-small">gap entre elementos próximos</span></div>
+    <div class="row"><span class="lbl">12px · space-3</span><div class="bar" style="width:12px"></div><span class="t-small">padding interno de pills/inputs</span></div>
+    <div class="row"><span class="lbl">16px · space-4</span><div class="bar" style="width:16px"></div><span class="t-small">espaçamento padrão entre itens</span></div>
+    <div class="row"><span class="lbl">24px · space-6</span><div class="bar" style="width:24px"></div><span class="t-small">padding de cards, gutter de grid</span></div>
+    <div class="row"><span class="lbl">32px · space-8</span><div class="bar" style="width:32px"></div><span class="t-small">separação entre blocos</span></div>
+    <div class="row"><span class="lbl">48px · space-12</span><div class="bar" style="width:48px"></div><span class="t-small">título↔conteúdo da seção</span></div>
+    <div class="row"><span class="lbl">64px · space-16</span><div class="bar" style="width:64px"></div><span class="t-small">respiro entre subseções</span></div>
+    <div class="row"><span class="lbl">80px · space-20</span><div class="bar" style="width:80px"></div><span class="t-small">padding vertical de seções</span></div>
+    <div class="row"><span class="lbl">120px · space-30</span><div class="bar" style="width:120px"></div><span class="t-small">respiro de hero / seções-âncora</span></div>
+  </div>
+</div></section>
+
+<!-- ============================== 6. COMPONENTES ============================== -->
+<section id="componentes"><div class="wrap">
+  <div class="sec-num">06 — Componentes</div>
+  <h2 class="sec">Componentes</h2>
+  <p class="sec-intro">Renderizados ao vivo com os estilos reais do sistema. Passe o mouse para ver hover; use Tab para ver o estado de foco (anel azul acessível).</p>
+
+  <h3 class="blk">Botões</h3>
+  <div class="comp-grid">
+    <div class="comp-cell"><span class="state">Primário</span><button class="btn btn-primary">Solicitar orçamento</button></div>
+    <div class="comp-cell"><span class="state">Secundário</span><button class="btn btn-secondary">Quero meu site</button></div>
+    <div class="comp-cell"><span class="state">Outline</span><button class="btn btn-outline">Ver projetos</button></div>
+    <div class="comp-cell"><span class="state">Ghost</span><button class="btn btn-ghost">Saiba mais →</button></div>
+    <div class="comp-cell"><span class="state">Disabled</span><button class="btn btn-disabled" disabled>Indisponível</button></div>
+  </div>
+  <div class="callout"><b>Regra de contraste:</b> o botão laranja usa <b>texto escuro</b>, não branco. Branco sobre <code>#F29200</code> tem contraste de apenas 2.36:1 (reprova WCAG). Texto escuro sobe para 8.89:1. Vale para qualquer fundo laranja ou amarelo.</div>
+
+  <h3 class="blk">Inputs</h3>
+  <div class="grid g2">
+    <div>
+      <div class="field"><label>Campo padrão</label><input class="input" placeholder="seu@email.com"></div>
+      <div class="field"><label>Select</label>
+        <select class="input"><option>Selecione um serviço</option><option>Criação de site</option><option>Loja virtual</option></select></div>
+      <div class="field"><label>Textarea</label><textarea class="input" placeholder="Conte sobre o seu projeto..."></textarea></div>
+    </div>
+    <div>
+      <div class="field"><label>Foco</label><input class="input" value="estado de foco" style="border-color:var(--color-primary-500);box-shadow:var(--shadow-focus)"></div>
+      <div class="field"><label>Erro</label><input class="input is-error" value="email-invalido"><span class="hint err">Informe um e-mail válido.</span></div>
+      <div class="field"><label>Sucesso</label><input class="input is-success" value="contato@empresa.com"><span class="hint ok">Tudo certo!</span></div>
+    </div>
+  </div>
+
+  <h3 class="blk">Cards</h3>
+  <div class="show-cards">
+    <div class="card-svc">
+      <div class="ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 18v3M16 18v3M6 21h12"/></svg></div>
+      <h4>Criação de Sites</h4>
+      <p>Sites rápidos e profissionais que transformam visitantes em clientes. Estrutura, ícone, título e descrição em hierarquia clara.</p>
+    </div>
+    <div class="card-proj">
+      <div class="thumb"><span>E-commerce</span><b>Raízes Café</b></div>
+      <div class="body"><h4>Loja virtual integrada</h4><p>Vendas online passaram a 30% do faturamento em 4 meses.</p></div>
+    </div>
+    <div class="card-test">
+      <p>O cuidado em entender o meu negócio antes de propor qualquer coisa fez toda a diferença.</p>
+      <div class="who"><div class="av">RM</div><div><b>Dr. Rafael Menezes</b><span>Diretor · Vértice Odontologia</span></div></div>
+    </div>
+  </div>
+  <p class="t-small" style="margin-top:16px"><b>Anatomia:</b> padding <code>24–32px</code> · raio <code>12–20px</code> · sombra <code>shadow-card</code> em repouso, <code>shadow-dropdown</code> + elevação <code>-4px</code> no hover · borda <code>1px #D9DCE1</code>. Hierarquia: mídia/ícone → título (display) → descrição (corpo) → ação.</p>
+</div></section>
+
+<!-- ============================== 7. ESTÉTICA ============================== -->
+<section id="estetica"><div class="wrap">
+  <div class="sec-num">07 — Estética</div>
+  <h2 class="sec">Estética visual</h2>
+  <p class="sec-intro">Cantos suaves, sombras discretas e bordas finas. A linguagem é limpa: profundidade vem da luz, não de contornos pesados.</p>
+  <h3 class="blk">Border radius</h3>
+  <div class="grid g4">
+    <div class="fx"><div class="box" style="border-radius:6px"></div><span class="lbl">sm · 6px (botões, inputs)</span></div>
+    <div class="fx"><div class="box" style="border-radius:12px"></div><span class="lbl">md · 12px (cards, modais)</span></div>
+    <div class="fx"><div class="box" style="border-radius:20px"></div><span class="lbl">lg · 20px (cards destaque)</span></div>
+    <div class="fx"><div class="box" style="border-radius:999px"></div><span class="lbl">full · pills, avatares</span></div>
+  </div>
+  <h3 class="blk">Sombras</h3>
+  <div class="grid g3">
+    <div class="fx"><div class="box" style="box-shadow:var(--shadow-card);border:none"></div><span class="lbl">card</span></div>
+    <div class="fx"><div class="box" style="box-shadow:var(--shadow-dropdown);border:none"></div><span class="lbl">dropdown</span></div>
+    <div class="fx"><div class="box" style="box-shadow:var(--shadow-modal);border:none"></div><span class="lbl">modal</span></div>
+  </div>
+  <h3 class="blk">Bordas</h3>
+  <p class="t-small"><b>Espessura:</b> 1px padrão (divisórias, cards), 1.5px em inputs e botões outline para presença. <b>Cor/opacidade:</b> <code>#D9DCE1</code> (neutral-200) para repouso; <code>#244F9D</code> para foco/ativo. Evite bordas escuras pesadas — a separação preferida é por fundo e sombra.</p>
+</div></section>
+
+<!-- ============================== 8. ÍCONES ============================== -->
+<section id="icones"><div class="wrap">
+  <div class="sec-num">08 — Ícones</div>
+  <h2 class="sec">Sistema de ícones</h2>
+  <p class="sec-intro">Ícones em linha (outline), traço uniforme, cantos arredondados — coerentes com a suavidade do logotipo. Nunca misturar estilos preenchido e linha na mesma tela.</p>
+  <div class="grid g3">
+    <div class="doc-card"><h4>Estilo</h4><p>Outline / stroke. Geométrico e amigável, sem detalhes decorativos.</p></div>
+    <div class="doc-card"><h4>Traço</h4><p><b>1.75px</b> em tamanho padrão (24px); 2px em ícones grandes. Linecap e linejoin arredondados.</p></div>
+    <div class="doc-card"><h4>Bibliotecas</h4><p><b>Lucide</b> (recomendada — combina perfeitamente), Phosphor (peso "regular") ou Heroicons (variante outline).</p></div>
+  </div>
+  <div class="ico-row">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21 8 14 2 9.4h7.6z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M4 4h16v12H5.2L4 17.2z"/></svg>
+  </div>
+</div></section>
+
+<!-- ============================== 9. IMAGENS ============================== -->
+<section id="imagens"><div class="wrap">
+  <div class="sec-num">09 — Imagens</div>
+  <h2 class="sec">Imagens &amp; mockups</h2>
+  <p class="sec-intro">A imagem precisa parecer tão profissional quanto o trabalho. Tratamento consistente cria a sensação de marca única, não de banco de imagens.</p>
+  <div class="grid g2">
+    <div class="doc-card"><h4>Projetos de portfólio</h4><p><b>Estilo:</b> mockups limpos em ambientes reais (laptop, celular) sobre fundo neutro ou em degradê azul da marca. <b>Proporção:</b> 16:10. <b>Tratamento:</b> cantos 12–20px, leve sombra, sem molduras pesadas.</p></div>
+    <div class="doc-card"><h4>Fotos institucionais</h4><p><b>Estilo:</b> naturais, luz clara, pessoas reais trabalhando. <b>Tratamento:</b> correção de cor levemente fria para conversar com o azul; evite filtros saturados ou vinhetas.</p></div>
+    <div class="doc-card"><h4>Mockups</h4><p>Padronize o ângulo (frontal ou 3/4) e a sombra em toda a galeria. Um overlay azul-marca a 8–12% unifica capturas de telas diferentes.</p></div>
+    <div class="doc-card"><h4>Ilustrações</h4><p><b>Estilo:</b> geométrico e flat, usando a paleta da marca. Traço coerente com os ícones. Servem para estados vazios, 404 e blocos conceituais — não competem com fotos.</p></div>
+  </div>
+  <p class="t-small" style="margin-top:16px"><b>Composição:</b> respeite o respiro (espaço negativo), alinhe ao grid e mantenha um único ponto focal por imagem. Texto sobre foto sempre com camada de escurecimento para garantir contraste.</p>
+</div></section>
+
+<!-- ============================== 10. ANIMAÇÃO ============================== -->
+<section id="animacao"><div class="wrap">
+  <div class="sec-num">10 — Movimento</div>
+  <h2 class="sec">Animações &amp; interações</h2>
+  <p class="sec-intro">Movimento com propósito: confirmar ações, guiar o olhar e dar vida sem distrair. Curva padrão <code>cubic-bezier(.2,.7,.2,1)</code>.</p>
+  <div class="grid g2">
+    <div class="doc-card"><h4>Hover</h4><p><b>Duração:</b> 200ms. <b>Intensidade:</b> sutil — elevação de 2–4px, leve clareamento ou escala 1.02. <b>Objetivo:</b> sinalizar clicável.</p><div style="margin-top:16px"><span class="anim-demo">Passe o mouse</span></div></div>
+    <div class="doc-card"><h4>Microinterações</h4><p><b>Duração:</b> 150–250ms. Foco em inputs (anel), troca de ícone, contador animado em estatísticas. <b>Objetivo:</b> feedback imediato.</p></div>
+    <div class="doc-card"><h4>Transições</h4><p><b>Duração:</b> 250–350ms. Abertura de menu, accordion de FAQ, troca de aba. Sempre com easing, nunca linear.</p></div>
+    <div class="doc-card reveal"><h4>Scroll reveal</h4><p><b>Duração:</b> 500–700ms. Entrada de seções com fade + translateY de 20px, em cascata (stagger 60–80ms). <b>Objetivo:</b> ritmo de descoberta. Esta seção mesma apareceu assim.</p></div>
+  </div>
+  <div class="callout"><b>Acessibilidade do movimento:</b> respeite <code>prefers-reduced-motion</code> — desligue translações e escalas para quem pede menos movimento.</div>
+</div></section>
+
+<!-- ============================== 11. ACESSIBILIDADE ============================== -->
+<section id="acess"><div class="wrap">
+  <div class="sec-num">11 — Acessibilidade</div>
+  <h2 class="sec">Acessibilidade (WCAG)</h2>
+  <p class="sec-intro">Contrastes reais, calculados a partir dos HEX da marca. Verde = AA ou melhor; vermelho = usar só onde permitido.</p>
+  <table>
+    <tr><th>Combinação</th><th>Contraste</th><th>Veredito</th></tr>
+    <tr><td>Slate #2A4151 sobre branco (corpo)</td><td><code>10.6:1</code></td><td>✅ AAA — texto padrão</td></tr>
+    <tr><td>Royal Blue sobre branco</td><td><code>7.84:1</code></td><td>✅ AAA — títulos e links</td></tr>
+    <tr><td>Branco sobre Royal Blue</td><td><code>7.84:1</code></td><td>✅ AAA — botão primário</td></tr>
+    <tr><td>Branco sobre Deep Navy</td><td><code>10.6:1</code></td><td>✅ AAA — seções escuras</td></tr>
+    <tr><td>Texto escuro sobre Laranja</td><td><code>8.89:1</code></td><td>✅ AAA — botão secundário</td></tr>
+    <tr><td>Branco sobre Laranja</td><td><code>2.36:1</code></td><td>❌ reprova — nunca usar</td></tr>
+    <tr><td>Texto escuro sobre Amber</td><td><code>12.4:1</code></td><td>✅ AAA — destaque com texto escuro</td></tr>
+    <tr><td>Bright Blue #008BD0 sobre branco</td><td><code>3.75:1</code></td><td>⚠️ só texto grande/ícones/UI</td></tr>
+    <tr><td>Grey #707173 sobre branco</td><td><code>4.89:1</code></td><td>✅ AA — texto secundário</td></tr>
+  </table>
+  <div class="grid g3" style="margin-top:24px">
+    <div class="doc-card"><h4>Legibilidade</h4><p>Corpo mínimo de 16px; linha de 60–75 caracteres; line-height ≥1.5 em texto longo.</p></div>
+    <div class="doc-card"><h4>Hierarquia</h4><p>Nunca comunicar só por cor: pareie com ícone, peso ou rótulo. Foco sempre visível (anel azul).</p></div>
+    <div class="doc-card"><h4>Melhorias sugeridas</h4><p>Alvos de toque ≥44px; <code>alt</code> em toda imagem; navegação por teclado completa; <code>prefers-reduced-motion</code>.</p></div>
+  </div>
+</div></section>
+
+<!-- ============================== 12. TOKENS ============================== -->
+<section id="tokens"><div class="wrap">
+  <div class="sec-num">12 — Tokens</div>
+  <h2 class="sec">Design tokens</h2>
+  <p class="sec-intro">A mesma fonte de verdade em três formatos. O CSS abaixo é exatamente o que dá vida a este documento — copie e use.</p>
+
+  <h3 class="blk">CSS Custom Properties</h3>
+<pre><span class="c">/* Cores */</span>
+<span class="tok-k">--color-primary-500</span>: <span class="tok-v">#244F9D</span>;  <span class="c">/* Royal Blue · marca */</span>
+<span class="tok-k">--color-navy-500</span>:    <span class="tok-v">#023E7C</span>;  <span class="c">/* profundidade */</span>
+<span class="tok-k">--color-info-500</span>:    <span class="tok-v">#008BD0</span>;  <span class="c">/* links/info */</span>
+<span class="tok-k">--color-accent-500</span>:  <span class="tok-v">#F29200</span>;  <span class="c">/* CTA */</span>
+<span class="tok-k">--color-highlight-500</span>:<span class="tok-v">#FFBB02</span>;  <span class="c">/* destaque */</span>
+<span class="tok-k">--color-neutral-800</span>: <span class="tok-v">#2A4151</span>;  <span class="c">/* texto */</span>
+<span class="c">/* Espaçamento (base 4px) */</span>
+<span class="tok-k">--space-4</span>: <span class="tok-v">16px</span>;  <span class="tok-k">--space-6</span>: <span class="tok-v">24px</span>;  <span class="tok-k">--space-20</span>: <span class="tok-v">80px</span>;
+<span class="c">/* Raio / Sombra */</span>
+<span class="tok-k">--radius-md</span>: <span class="tok-v">12px</span>;
+<span class="tok-k">--shadow-card</span>: <span class="tok-v">0 1px 2px rgba(16,21,28,.04), 0 8px 24px rgba(16,21,28,.08)</span>;</pre>
+
+  <h3 class="blk">Tailwind (tailwind.config.js)</h3>
+<pre><span class="tok-k">theme</span>: {
+  <span class="tok-k">extend</span>: {
+    <span class="tok-k">colors</span>: {
+      <span class="tok-k">primary</span>: { <span class="tok-v">500</span>:<span class="tok-v">'#244F9D'</span>, <span class="tok-v">600</span>:<span class="tok-v">'#1F4488'</span>, <span class="tok-v">900</span>:<span class="tok-v">'#0F1F3D'</span> },
+      <span class="tok-k">navy</span>:    <span class="tok-v">'#023E7C'</span>,
+      <span class="tok-k">info</span>:    <span class="tok-v">'#008BD0'</span>,
+      <span class="tok-k">accent</span>:  { <span class="tok-v">500</span>:<span class="tok-v">'#F29200'</span>, <span class="tok-v">600</span>:<span class="tok-v">'#DB6D0E'</span> },
+      <span class="tok-k">amber</span>:   <span class="tok-v">'#FFBB02'</span>,
+    },
+    <span class="tok-k">fontFamily</span>: {
+      <span class="tok-k">display</span>: [<span class="tok-v">'Archivo'</span>, <span class="tok-v">'sans-serif'</span>],
+      <span class="tok-k">body</span>:    [<span class="tok-v">'Hanken Grotesk'</span>, <span class="tok-v">'sans-serif'</span>],
+    },
+    <span class="tok-k">borderRadius</span>: { <span class="tok-k">sm</span>:<span class="tok-v">'6px'</span>, <span class="tok-k">md</span>:<span class="tok-v">'12px'</span>, <span class="tok-k">lg</span>:<span class="tok-v">'20px'</span> },
+  }
+}</pre>
+
+  <h3 class="blk">JSON (W3C Design Tokens — Figma / Style Dictionary)</h3>
+<pre>{
+  <span class="tok-k">"color"</span>: {
+    <span class="tok-k">"primary"</span>:   { <span class="tok-k">"500"</span>: { <span class="tok-k">"value"</span>: <span class="tok-v">"#244F9D"</span> } },
+    <span class="tok-k">"accent"</span>:    { <span class="tok-k">"500"</span>: { <span class="tok-k">"value"</span>: <span class="tok-v">"#F29200"</span> } },
+    <span class="tok-k">"neutral"</span>:   { <span class="tok-k">"800"</span>: { <span class="tok-k">"value"</span>: <span class="tok-v">"#2A4151"</span> } }
+  },
+  <span class="tok-k">"spacing"</span>:    { <span class="tok-k">"4"</span>: { <span class="tok-k">"value"</span>: <span class="tok-v">"16px"</span> } },
+  <span class="tok-k">"radius"</span>:     { <span class="tok-k">"medium"</span>: { <span class="tok-k">"value"</span>: <span class="tok-v">"12px"</span> } },
+  <span class="tok-k">"shadow"</span>:     { <span class="tok-k">"card"</span>: { <span class="tok-k">"value"</span>: <span class="tok-v">"0 8px 24px rgba(16,21,28,.08)"</span> } }
+}</pre>
+</div></section>
+
+<!-- ============================== 13. CONVERSÃO ============================== -->
+<section id="conversao"><div class="wrap">
+  <div class="sec-num">13 — Conversão</div>
+  <h2 class="sec">Recomendações para conversão</h2>
+  <p class="sec-intro">O sistema é bonito por consequência e eficaz por intenção. Estas diretrizes ligam o visual ao objetivo: gerar contatos.</p>
+  <div class="grid g2">
+    <div class="doc-card"><h4>Posicionamento dos CTAs</h4><p>CTA primário (laranja) visível na primeira dobra, repetido ao fim de cada seção de prova (após portfólio e depoimentos) e fixo no topo em mobile. Um objetivo por tela.</p></div>
+    <div class="doc-card"><h4>Hierarquia visual ideal</h4><p>Headline (Archivo) → benefício (corpo) → prova (números/depoimento) → ação (CTA laranja). O laranja só aparece onde você quer o clique.</p></div>
+    <div class="doc-card"><h4>Geração de leads</h4><p>Formulários curtos (nome, contato, mensagem). Botão com texto de valor ("Quero meu orçamento", não "Enviar"). Estado de sucesso claro. WhatsApp como atalho de baixo atrito.</p></div>
+    <div class="doc-card"><h4>Seções mais importantes</h4><p>Hero, Portfólio (prova de competência), Depoimentos + Estatísticas (prova social) e Chamada Final. São as que mais movem a decisão.</p></div>
+  </div>
+  <h3 class="blk">Elementos que reforçam autoridade</h3>
+  <div class="pills">
+    <span class="pill">Números reais (+200 projetos)</span>
+    <span class="pill">Depoimentos com nome e empresa</span>
+    <span class="pill">Casos desafio→resultado</span>
+    <span class="pill">Logos de clientes</span>
+    <span class="pill">Conteúdo de blog consistente</span>
+    <span class="pill">Selos e certificações</span>
+    <span class="pill">Processo transparente</span>
+  </div>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <b>AROS · Design System v1.0</b><br>
+  Royal Blue #244F9D · Orange #F29200 · Archivo + Hanken Grotesk · Base 4px<br>
+  Pronto para Figma, HTML/CSS, Tailwind, React e Next.js.
+</div></footer>
+
+<script>
+// Scroll reveal demo
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.2});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// Smooth anchor offset for sticky nav
+</script>
